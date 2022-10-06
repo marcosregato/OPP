@@ -1,3 +1,4 @@
 01,senha_1,banana,1.0
 03,senha_3,abacaxi,3.0
 02,senha_2,carro,2.0
+04,senha_4,bola,4.0

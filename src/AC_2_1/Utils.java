@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -181,16 +182,16 @@ public class Utils {
 				coluna.add(Double.valueOf(colValor[3]));
 			}
 			Double valor = Collections.min(coluna);
-			
+
 			return valor;
-		
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	//TODO NOVO METODO
 	public Double getContaMenorSaldo(String file) {
 		try {
@@ -204,28 +205,28 @@ public class Utils {
 				coluna.add(Double.valueOf(colValor[3]));
 			}
 			Double valor = Collections.min(coluna);
-			
+
 			return valor;
-		
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	//TODO NOVO METODO
 	public void getDepositoSaldo(String file, String saida, String accountNumber, Double valor) {
 		try {
-			
+
 			File gravar = new File(saida);
-			
+
 			FileWriter fw = new FileWriter(gravar,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 			Scanner sc = new Scanner(new File(file));
 			sc.useDelimiter(",");
-			
+
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			String colValor[];
@@ -242,31 +243,31 @@ public class Utils {
 					pw.println(linha);
 				}
 			}
-			
+
 			sc.close();
 			pw.flush();
 			pw.close();
-			
+
 			File removeLine = new File(file);
 			gravar.renameTo(removeLine);
-					
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	//TODO NOVO METODO
 	public void getSacarSaldo(String file, String saida, String accountNumber, Double valor) {
 		try {
-			
+
 			File gravar = new File(saida);
-			
+
 			FileWriter fw = new FileWriter(gravar,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 			Scanner sc = new Scanner(new File(file));
 			sc.useDelimiter(",");
-			
+
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			String colValor[];
@@ -275,7 +276,7 @@ public class Utils {
 			while ((line = reader.readLine()) != null) {
 				colValor = line.split(",");
 				if(colValor[0].contains(accountNumber)) {
-					
+
 					saldo = valor - Double.valueOf(colValor[3]);
 					String s = colValor[0]+","+colValor[1]+","+colValor[2]+","+saldo;
 					pw.println(s);
@@ -284,20 +285,68 @@ public class Utils {
 					pw.println(s);
 				}
 			}
-			
+
 			sc.close();
 			pw.flush();
 			pw.close();
-			
+
 			File removeLine = new File(file);
 			gravar.renameTo(removeLine);
-					
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
 
+	//TODO NOVO METODO
+	public String comprarArquivo() {
+		try {
+
+			BufferedReader arqSaida = new BufferedReader(new FileReader(".\\saida.txt"));
+			BufferedReader arqGravar = new BufferedReader(new FileReader(".\\gravar.txt"));
+			String lineSaida;
+			String lineGravar;
+			String colSaida[];
+			String colGravar[];
+
+			List<String> listSaida = new ArrayList<>();
+			List<String> listGravar = new ArrayList<>();
+
+			while ((lineSaida = arqSaida.readLine()) != null) {
+				colSaida = lineSaida.split(",");
+				listSaida.add(colSaida[2]);
+			}
+			while ((lineGravar = arqGravar.readLine()) != null) {
+				colGravar = lineGravar.split(",");
+				listGravar.add(colGravar[2]);
+			}
+
+			String arrayIguais = "arrayIguais";
+			if(listSaida.equals(listGravar)) {
+				return arrayIguais;
+			}else {
+				listSaida.removeAll(listGravar);
+				return String.valueOf(listSaida);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	public void getLineConta() {
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+
+	public static void main(String[] asd) {
+		Utils u = new Utils();
+		System.out.println(u.comprarArquivo());
+	}
 }
