@@ -1,4 +1,4 @@
-package AC_2_1;
+package AC_2;
 
 import java.util.ArrayList;
 import java.util.List;

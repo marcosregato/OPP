@@ -1,4 +1,4 @@
-package AC_2_1;
+package AC_2;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

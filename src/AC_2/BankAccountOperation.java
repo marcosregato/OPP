@@ -1,4 +1,4 @@
-package AC_2_1;
+package AC_2;
 
 public interface BankAccountOperation {
     public double getBalance(int accountNumber);

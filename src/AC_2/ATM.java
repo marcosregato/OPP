@@ -1,4 +1,4 @@
-package AC_2_1;
+package AC_2;
 
 public class ATM implements BankAccountOperation {
     private Bank bank;
