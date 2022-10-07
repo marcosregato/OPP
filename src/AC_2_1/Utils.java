@@ -335,18 +335,57 @@ public class Utils {
 		return null;
 	}
 	
-	
-	public void getLineConta() {
+	//TODO NOVO METODO
+	public String getLineConta(String usuario) {
 		try {
+			
+			String saida = ".\\saida.txt";
+
+			BufferedReader reader = new BufferedReader(new FileReader(saida));
+			String line;
+			String colValor[];
+
+			while ((line = reader.readLine()) != null) {
+				colValor = line.split(",");
+				if(colValor[2].contains(String.valueOf(usuario))) {
+					String linha = colValor[0]+","+colValor[1]+","+colValor[2]+","+colValor[3];
+ 					return linha;
+				} 
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	//TODO NOVO METODO
+	public void salvarNovaConta(String novaLinha) {
+		try {
+			PrintWriter csvWriter;
+			csvWriter = new  PrintWriter(new FileWriter(".\\gravar.txt",true));//arqSaida,true));
+			csvWriter.println(novaLinha);
+			csvWriter.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	//TODO NOVO METODO Sincronizar os arquivos 
+	public void updateGravar() {
+		try {
+			String newLine = comprarArquivo();
+			String novaLinha = newLine.replace("[", "").replace("]", "");
+			
+			salvarNovaConta(getLineConta(novaLinha));
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
+		
 	}
-
-
-	public static void main(String[] asd) {
-		Utils u = new Utils();
-		System.out.println(u.comprarArquivo());
-	}
+	
 }

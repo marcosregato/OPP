@@ -37,16 +37,18 @@ public class App {
 				password = utils.showStringJOptionPane("Digite uma senha para a conta.");
 				owner = utils.showStringJOptionPane("Digite o nome do responsavel da conta.");
 				balance = utils.showIntJOptionPane("Digite o saldo para a conta.");
-				File arqSaida   = new File(".\\saida2.csv");
 				atm.getBank().addAccount(new BankAccount(accountNumber, password, owner,
 						balance));
 
-				String linhaConta = accountNumber+","+password+","+owner+","+ balance;
+				utils.salvarNovaConta(accountNumber+","+password+","+owner+","+ balance);
+				
+				Thread thread = new Thread(){
+				    public void run(){
+				    	utils.updateGravar();
+				    }
+				  };
 
-				PrintWriter csvWriter;
-				csvWriter = new  PrintWriter(new FileWriter(arqSaida,true));
-				csvWriter.println(linhaConta);
-				csvWriter.close();
+				  thread.start();
 				
 				break;
 			case 2:
