@@ -1,9 +1,5 @@
 package AC_2;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-
 public class App {
 
 	public static void main(String[] args) throws Exception {
@@ -64,7 +60,7 @@ public class App {
 				break;
 			case 3:
 				accountNumber = utils.showIntJOptionPane("Digite o numero da conta que deseja consultar o saldo.");
-				utils.showMessageJOptionPane("O saldo da conta é: " + utils.getConsultarSaldo(".\\saida.txt", String.valueOf(accountNumber)));
+				utils.showMessageJOptionPane("O saldo da conta é: " + String.valueOf(accountNumber));
 				
 				//utils.showMessageJOptionPane("O saldo da conta é: " + atm.getBalance(accountNumber));
 				break;
@@ -73,8 +69,8 @@ public class App {
 				accountNumber = utils.showIntJOptionPane("Digite o numero da conta que deseja consultar o saldo.");
 				valor = utils.showIntJOptionPane("Digite o o valor do deseja consultar.");
 				
-				utils.getSacarSaldo("saida.txt", "gravar.txt", String.valueOf(accountNumber), Double.valueOf(valor));
-				utils.showMessageJOptionPane("O saldo do depósito é: " + utils.getConsultarSaldo(".\\gravar.txt", String.valueOf(accountNumber)));
+				utils.getSacarSaldo(String.valueOf(accountNumber), Double.valueOf(valor));
+				utils.showMessageJOptionPane("O saldo do depósito é: " + String.valueOf(accountNumber));
 				
 				//doDepositOrWithdraw(atm, "withdraw");
 				break;
@@ -82,25 +78,25 @@ public class App {
 				accountNumber = utils.showIntJOptionPane("Digite o numero da conta que deseja consultar o saldo.");
 				valor = utils.showIntJOptionPane("Digite o o valor do deseja consultar.");
 				
-				utils.getDepositoSaldo("saida.txt", "gravar.txt", String.valueOf(accountNumber), Double.valueOf(valor));
-				utils.showMessageJOptionPane("O saldo do depósito é: " + utils.getConsultarSaldo(".\\gravar.txt", String.valueOf(accountNumber)));
+				utils.getDepositoSaldo(String.valueOf(accountNumber), Double.valueOf(valor));
+				utils.showMessageJOptionPane("O saldo do depósito é: " +  String.valueOf(accountNumber));
 				//doDepositOrWithdraw(atm, "deposit");
 				break;
 			case 6:
 				//utils.showMessageJOptionPane("O valor da soma de todas contas é " + atm.getBank().getSumBalanceAccounts());
-				utils.showMessageJOptionPane("O valor da soma de todas contas é "+utils.getSomaTotal(".\\saida.txt"));
+				utils.showMessageJOptionPane("O valor da soma de todas contas é "+utils.getSomaTotal(utils.getProperty("arqEntrada")));
 				
 				break;
 			case 7:
-				utils.showMessageJOptionPane("A conta com o maior saldo:\n" + utils.getContaMaiorSaldo(".\\saida.txt"));
+				utils.showMessageJOptionPane("A conta com o maior saldo:\n" + utils.getContaMaiorSaldo());
 				//utils.showMessageJOptionPane("A conta com o maior saldo:\n" + atm.getBank().getAccountBiggestBalance().showBankAccount());
 				break;
 			case 8:
-				utils.showMessageJOptionPane("A conta com o menor saldo:\n" + utils.getContaMenorSaldo(".\\saida.txt"));
+				utils.showMessageJOptionPane("A conta com o menor saldo:\n" + utils.getContaMenorSaldo());
 				//utils.showMessageJOptionPane("A conta com o menor saldo:\n" + atm.getBank().getAccountLowestBalance().showBankAccount());
 				break;
 			case 9:
-				utils.showMessageJOptionPane("A média de saldo das contas é: " +utils.getMedia(".\\saida.txt"));
+				utils.showMessageJOptionPane("A média de saldo das contas é: " +utils.getMedia());
 				//utils.showMessageJOptionPane("A média de saldo das contas é: " + atm.getBank().getAverageBalance());
 				break;
 			}

@@ -3,18 +3,23 @@ package AC_2;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
 public class Utils {
+	
+
+	
 
 	public void errorMessage() {
 		JOptionPane.showMessageDialog(null, "Digite um valor valido!!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -71,11 +76,11 @@ public class Utils {
 
 	//TODO NOVO METODO
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public String getContaUsuario(String usuario, String file) {
+	public String getContaUsuario(String usuario) {
 		try {
 
 			@SuppressWarnings("resource")
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
 			String line;
 			List<String> lines = new ArrayList();
 
@@ -120,10 +125,10 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
-	public Double getMedia(String file) {
+	public Double getMedia() {
 		try {
 
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
 			String line;
 			String colValor[];
 			Double soma =0.0;
@@ -145,10 +150,10 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
-	public String getConsultarSaldo(String file, String accountNumber) {
+	public String getConsultarSaldo(String accountNumber) {
 		try {
 
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
 			String line;
 			String colValor[];
 			String saldo =null;
@@ -170,9 +175,9 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
-	public Double getContaMaiorSaldo(String file) {
+	public Double getContaMaiorSaldo() {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
 			String line;
 			String colValor[];
 			List<Double> coluna = new ArrayList<>();
@@ -193,9 +198,9 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
-	public Double getContaMenorSaldo(String file) {
+	public Double getContaMenorSaldo() {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
 			String line;
 			String colValor[];
 			List<Double> coluna = new ArrayList<>();
@@ -216,18 +221,18 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
-	public void getDepositoSaldo(String file, String saida, String accountNumber, Double valor) {
+	public void getDepositoSaldo(String accountNumber, Double valor) {
 		try {
 
-			File gravar = new File(saida);
+			File gravar = new File(getProperty("arqGravar"));
 
 			FileWriter fw = new FileWriter(gravar,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-			Scanner sc = new Scanner(new File(file));
+			Scanner sc = new Scanner(new File(getProperty("arqEntrada")));
 			sc.useDelimiter(",");
 
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
 			String line;
 			String colValor[];
 			double saldo =0.0;
@@ -248,7 +253,7 @@ public class Utils {
 			pw.flush();
 			pw.close();
 
-			File removeLine = new File(file);
+			File removeLine = new File(getProperty("arqEntrada"));
 			gravar.renameTo(removeLine);
 
 		} catch (Exception e) {
@@ -257,18 +262,18 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
-	public void getSacarSaldo(String file, String saida, String accountNumber, Double valor) {
+	public void getSacarSaldo(String accountNumber, Double valor) {
 		try {
 
-			File gravar = new File(saida);
+			File gravar = new File(getProperty("arqGravar"));
 
 			FileWriter fw = new FileWriter(gravar,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-			Scanner sc = new Scanner(new File(file));
+			Scanner sc = new Scanner(new File(getProperty("arqEntrada")));
 			sc.useDelimiter(",");
 
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
 			String line;
 			String colValor[];
 			double saldo =0.0;
@@ -290,7 +295,7 @@ public class Utils {
 			pw.flush();
 			pw.close();
 
-			File removeLine = new File(file);
+			File removeLine = new File(getProperty("arqEntrada"));
 			gravar.renameTo(removeLine);
 
 		} catch (Exception e) {
@@ -302,8 +307,8 @@ public class Utils {
 	public String comprarArquivo() {
 		try {
 
-			BufferedReader arqSaida = new BufferedReader(new FileReader(".\\saida.txt"));
-			BufferedReader arqGravar = new BufferedReader(new FileReader(".\\gravar.txt"));
+			BufferedReader arqSaida = new BufferedReader(new FileReader(getProperty("arqEntrada")));
+			BufferedReader arqGravar = new BufferedReader(new FileReader(getProperty("arqGravar")));
 			String lineSaida;
 			String lineGravar;
 			String colSaida[];
@@ -339,9 +344,7 @@ public class Utils {
 	public String getLineConta(String usuario) {
 		try {
 			
-			String saida = ".\\saida.txt";
-
-			BufferedReader reader = new BufferedReader(new FileReader(saida));
+			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
 			String line;
 			String colValor[];
 
@@ -364,7 +367,7 @@ public class Utils {
 	public void salvarNovaConta(String novaLinha) {
 		try {
 			PrintWriter csvWriter;
-			csvWriter = new  PrintWriter(new FileWriter(".\\gravar.txt",true));//arqSaida,true));
+			csvWriter = new  PrintWriter(new FileWriter(getProperty("arqEntrada"),true));
 			csvWriter.println(novaLinha);
 			csvWriter.close();
 		} catch (Exception e) {
@@ -387,5 +390,19 @@ public class Utils {
 		}
 		
 	}
+	
+	public static String getProperty(String value) {
+        Properties properties = null;
+        InputStream inputStream = null;
+        String path = System.getProperty("user.dir");
+        try {
+            inputStream = new FileInputStream(path + "/config.properties");
+            properties = new Properties();
+            properties.load(inputStream);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return properties.getProperty(value).trim();
+    }
 	
 }
