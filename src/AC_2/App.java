@@ -2,6 +2,7 @@ package AC_2;
 
 public class App {
 
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) throws Exception {
 		ATM atm = new ATM(new Bank(), 5);
 		HandleNumber handleNumber = new HandleNumber();

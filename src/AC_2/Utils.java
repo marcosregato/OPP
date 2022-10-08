@@ -18,9 +18,6 @@ import javax.swing.JOptionPane;
 
 public class Utils {
 	
-
-	
-
 	public void errorMessage() {
 		JOptionPane.showMessageDialog(null, "Digite um valor valido!!", "Erro", JOptionPane.ERROR_MESSAGE);
 	}
@@ -103,6 +100,7 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
+	@SuppressWarnings("resource")
 	public Double getSomaTotal(String file) {
 		try {
 
@@ -125,6 +123,7 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
+	@SuppressWarnings("resource")
 	public Double getMedia() {
 		try {
 
@@ -150,6 +149,7 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
+	@SuppressWarnings("resource")
 	public String getConsultarSaldo(String accountNumber) {
 		try {
 
@@ -175,6 +175,7 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
+	@SuppressWarnings("resource")
 	public Double getContaMaiorSaldo() {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
@@ -198,6 +199,7 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
+	@SuppressWarnings("resource")
 	public Double getContaMenorSaldo() {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(getProperty("arqEntrada")));
@@ -304,6 +306,7 @@ public class Utils {
 	}
 
 	//TODO NOVO METODO
+	@SuppressWarnings("resource")
 	public String comprarArquivo() {
 		try {
 
@@ -341,6 +344,7 @@ public class Utils {
 	}
 	
 	//TODO NOVO METODO
+	@SuppressWarnings("resource")
 	public String getLineConta(String usuario) {
 		try {
 			
